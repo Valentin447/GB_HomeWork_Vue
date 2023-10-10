@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson1</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson1</title>
+  </head>
+  <body>
+    <!-- 
+    1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки должен перевернуться и отобразиться в обратном порядке. 
+    2. Есть список элементов. Пользователь может добавлять новые элементы списка с текстом 
+      “Новый элемент списка” нажав на кнопку "Добавить". 
+    3. *Дополнительное задание: При клике на элемент списка он должен быть удален. (по желанию) 
+  -->
+    <div id="App">
+      <h2>Задание 1</h2>
+      <button class="button" @click="flip()">{{ message }}</button>
+
+      <h2>Задание 2</h2>
+      <ul>
+        <li @click="del(index)" v-for="(item, index) of items">{{ item }}</li>
+      </ul>
+      <button @click="add()">Добавить</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        data() {
+          return {
+            message: "Перевернуть",
+            items: [],
+            count: 1,
+          };
+        },
+        methods: {
+          flip() {
+            this.message = this.message.split("").reverse().join("");
+          },
+          add() {
+            this.items.push(`Новый элемент списка ${this.count}`);
+            this.count++;
+          },
+          del(index) {
+            this.items.splice(index, 1);
+          },
+        },
+      };
+      Vue.createApp(App).mount("#App");
+    </script>
+  </body>
 </html>
