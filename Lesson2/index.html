@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 2 vue</title>
+  </head>
+  <body>
+    <!-- Вы разрабатываете приложение для отображения и сортировки списка товаров. У вас есть массив объектов products, 
+    где каждый объект представляет товар с его названием и ценой. Вам необходимо отобразить список товаров и 
+    предоставить пользователю возможность сортировать товары по цене (по возрастанию и по убыванию). -->
+
+    <div id="App">
+      <ul>
+        <li v-for="(product, index) in products" :key="product.index">
+          <span>{{ product.name }} - {{ product.price }} руб.</span>
+        </li>
+      </ul>
+      <button @click="descend">по убыванию</button>
+      <button @click="ascend">по возрастанию</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        data() {
+          return {
+            products: [
+              { name: "Ручка", price: 100 },
+              { name: "Карандаш", price: 80 },
+              { name: "Бумага", price: 450 },
+              { name: "Блокнот", price: 220 },
+              { name: "Резинка", price: 40 },
+              { name: "Тетрадь", price: 190 },
+            ],
+          };
+        },
+        methods: {
+          ascend() {
+            return this.products.sort((a, b) => {
+              if (a.price > b.price) {
+                return 1;
+              } else if (a.price < b.price) {
+                return -1;
+              } else {
+                return 0;
+              }
+            });
+          },
+          descend() {
+            return this.products.sort((a, b) => {
+              if (a.price > b.price) {
+                return -1;
+              } else if (a.price < b.price) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+          },
+        },
+      };
+      Vue.createApp(App).mount("#App");
+    </script>
+  </body>
+</html>
